@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import java.awt.event.KeyEvent;
+
 /**
  *
  * @author LUCYLEONOR
@@ -28,16 +30,122 @@ public class Hora extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtH = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        lblD = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        lblT = new javax.swing.JLabel();
+        cmdCalcular = new javax.swing.JButton();
+        cmdRestaurar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hora");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 410));
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        jLabel1.setText("Pago de Hora");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel2.setText("Núm. Horas");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 80, -1, -1));
+
+        txtH.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtHKeyPressed(evt);
+            }
+        });
+        jPanel1.add(txtH, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 100, -1));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel3.setText("Descuento");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
+
+        lblD.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblD.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblD, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 140, 30));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 14)); // NOI18N
+        jLabel5.setText("Total a Pagar");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
+
+        lblT.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblT.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.add(lblT, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 140, 30));
+
+        cmdCalcular.setText("Calcular");
+        cmdCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdCalcular, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 370, 130, -1));
+
+        cmdRestaurar.setText("Restaurar");
+        cmdRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRestaurarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdRestaurar, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 370, 130, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 420));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
+
+        String r, r1;
+        double h, d, t;
+        
+        h = Double.parseDouble(txtH.getText());
+        
+        d = (h * 20000) * 0.05;
+        
+        t = (h * 20000) - d;
+        
+        r = String.valueOf(t);
+        r1 = String.valueOf(d);
+        
+        lblD.setText(r1);
+        lblT.setText(r);
+        
+    }//GEN-LAST:event_cmdCalcularActionPerformed
+
+    private void cmdRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRestaurarActionPerformed
+
+        txtH.setText("");
+        lblD.setText("");
+        lblT.setText("");
+        txtH.requestFocusInWindow();
+    }//GEN-LAST:event_cmdRestaurarActionPerformed
+
+    private void txtHKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHKeyPressed
+        
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            
+            
+        String r, r1;
+        double h, d, t;
+        
+        h = Double.parseDouble(txtH.getText());
+        
+        d = (h * 20000) * 0.05;
+        
+        t = (h * 20000) - d;
+        
+        r = String.valueOf(t);
+        r1 = String.valueOf(d);
+        
+        lblD.setText(r1);
+        lblT.setText(r);
+        }
+    }//GEN-LAST:event_txtHKeyPressed
 
     /**
      * @param args the command line arguments
@@ -75,6 +183,15 @@ public class Hora extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdCalcular;
+    private javax.swing.JButton cmdRestaurar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblD;
+    private javax.swing.JLabel lblT;
+    private javax.swing.JTextField txtH;
     // End of variables declaration//GEN-END:variables
 }
