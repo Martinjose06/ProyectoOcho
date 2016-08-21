@@ -6,6 +6,7 @@
 package interfaz;
 
 import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -58,6 +59,9 @@ public class Hora extends javax.swing.JFrame {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtHKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtHKeyTyped(evt);
+            }
         });
         jPanel1.add(txtH, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 100, -1));
 
@@ -100,21 +104,31 @@ public class Hora extends javax.swing.JFrame {
 
     private void cmdCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularActionPerformed
 
-        String r, r1;
-        double h, d, t;
-        
-        h = Double.parseDouble(txtH.getText());
-        
-        d = (h * 20000) * 0.05;
-        
-        t = (h * 20000) - d;
-        
-        r = String.valueOf(t);
-        r1 = String.valueOf(d);
-        
-        lblD.setText(r1);
-        lblT.setText(r);
-        
+        if (txtH.getText().trim().isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No Ha Ingresado La Hora", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtH.requestFocusInWindow();
+        } else if (txtH.getText().equalsIgnoreCase("0")) {
+            JOptionPane.showMessageDialog(this, "El Numero De Horas Debe Ser Superior a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+            txtH.selectAll();
+            txtH.requestFocusInWindow();
+        } else {
+            String r, r1;
+            double h, d, t;
+
+            h = Double.parseDouble(txtH.getText());
+
+            d = (h * 20000) * 0.05;
+
+            t = (h * 20000) - d;
+
+            r = String.valueOf(t);
+            r1 = String.valueOf(d);
+
+            lblD.setText("$ " + r1);
+            lblT.setText("$ " + r);
+        }
+
+
     }//GEN-LAST:event_cmdCalcularActionPerformed
 
     private void cmdRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRestaurarActionPerformed
@@ -129,23 +143,41 @@ public class Hora extends javax.swing.JFrame {
         
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             
-            
-        String r, r1;
-        double h, d, t;
-        
-        h = Double.parseDouble(txtH.getText());
-        
-        d = (h * 20000) * 0.05;
-        
-        t = (h * 20000) - d;
-        
-        r = String.valueOf(t);
-        r1 = String.valueOf(d);
-        
-        lblD.setText(r1);
-        lblT.setText(r);
+                    if (txtH.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "No Ha Ingresado La Hora", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtH.requestFocusInWindow();
+            } else if (txtH.getText().equalsIgnoreCase("0")) {
+                JOptionPane.showMessageDialog(this, "El Numero De Horas Debe Ser Superior a 0", "ERROR", JOptionPane.ERROR_MESSAGE);
+                txtH.selectAll();
+                txtH.requestFocusInWindow();
+            } else {
+                String r, r1;
+                double h, d, t;
+
+                h = Double.parseDouble(txtH.getText());
+
+                d = (h * 20000) * 0.05;
+
+                t = (h * 20000) - d;
+
+                r = String.valueOf(t);
+                r1 = String.valueOf(d);
+
+                lblD.setText("$ " + r1);
+                lblT.setText("$ " + r);
+        }
         }
     }//GEN-LAST:event_txtHKeyPressed
+
+    private void txtHKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHKeyTyped
+
+        char c = evt.getKeyChar();
+
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtHKeyTyped
 
     /**
      * @param args the command line arguments
